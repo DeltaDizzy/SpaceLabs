@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="KSPBuildTools" Version="0.0.3" />
+  </ItemGroup>
+
+  <!-- Version Files -->
+  <ItemGroup>
+    <KSPVersionFile Include=".">
+      <Destination>$(RepoRootPath)GameData/SpaceLabs/SpaceLabs.version</Destination>
+      <URL>https://github.com/DeltaDizzy/SpaceLabs/releases/latest/download/SpaceLabs.version</URL>
+      <Download>https://github.com/DeltaDizzy/SpaceLabs/releases/latest</Download>
+    </KSPVersionFile>
+  </ItemGroup>
+
+</Project>
