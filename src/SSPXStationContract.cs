@@ -1,20 +1,33 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Contracts;
 using Contracts.Parameters;
+using UnityEngine;
 
 namespace SpaceLabs 
 {
     public class SSPXStationContract : Contract
     {
-        private float reward;
+        private float reward = 1;
+
+        private List<CelestialBody> sortedBodies = FlightGlobals.Bodies;
         private CelestialBody TargetBody {
             get {
                 // next body kerbin that has been orbited
-                //var orbitedbodies = ProgressTracking.Instance.celestialBodyNodes.Where(tree => tree.orbit.IsComplete)
-                return FlightGlobals.Bodies.Find(b => b.name is "Kerbin");
+                var orbitedbodies = ProgressTracking.Instance.celestialBodyNodes
+                                    .Where(tree => tree.orbit.IsComplete)
+                                    .Select(tree => tree.Body);
+                CelestialBody star = sortedBodies.Find(b => b.name is "Sun");
+                if (star != null) // we havent processed this yet
+                {
+                    sortedBodies.Remove(star);
+                    sortedBodies.Sort((CelestialBody b1, CelestialBody b2) => b1.scienceValues.RecoveryValue.CompareTo(b2.scienceValues.RecoveryValue));
+
+                }
+                var validBodies = sortedBodies.Intersect(orbitedbodies);
+                return validBodies.First();
             }
         }
-
         public float NumberOfYears => numberOfYears;
 
         private float failure = 1;
@@ -31,22 +44,20 @@ namespace SpaceLabs
             return true; 
         }
 
-        public override bool CanBeCancelled()
-        {
-            return base.CanBeCancelled();
+        void Log(string msg) {
+            Debug.Log($"[SpaceLabs]: {msg}");
         }
 
-        public override bool CanBeDeclined()
-        {
-            return base.CanBeDeclined();
-        }
+        public override bool CanBeCancelled() => true;
+
+        public override bool CanBeDeclined() => true;
 
         protected override string GetHashString()
         {
-            return base.GetHashString();
+            return $"SSPXStation{TargetBody}";
         }
 
-        protected override string GetTitle() => "Build a new space station in orbit of Kerbin";
+        protected override string GetTitle() => "Build a new space station in orbit of }";
 
         protected override string GetDescription()
         {
@@ -85,7 +96,7 @@ namespace SpaceLabs
 
         public override bool MeetRequirements()
         {
-            return base.MeetRequirements();
+            return TargetBody != null;
         }
     }
 }
