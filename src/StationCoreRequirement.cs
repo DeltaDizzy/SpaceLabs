@@ -29,17 +29,17 @@ namespace SpaceLabs
             //RDTech.State state = node.state;
             //Debug.Log($"[SpaceLabs]: state is {state}");
             var unlockedparts = parts.Where(part => ResearchAndDevelopment.Instance.GetTechState(part.TechRequired) != null);
-            Debug.Log("[SpaceLabs]: valid parts:");
-            foreach (AvailablePart part in parts)
-            {
-                Debug.Log($"[SpaceLabs]: {part.name} / {part.title}");
-            }
-            Debug.Log("[SpaceLabs]: ========================");
-            Debug.Log("[SpaceLabs]: unlocked parts:");
-            foreach (AvailablePart part in unlockedparts)
-            {
-                Debug.Log($"[SpaceLabs]: {part.name} / {part.title}");
-            }
+            //Debug.Log("[SpaceLabs]: valid parts:");
+            //foreach (AvailablePart part in parts)
+            //{
+            //    Debug.Log($"[SpaceLabs]: {part.name} / {part.title}");
+            //}
+            //Debug.Log("[SpaceLabs]: ========================");
+            //Debug.Log("[SpaceLabs]: unlocked parts:");
+            //foreach (AvailablePart part in unlockedparts)
+            //{
+            //    Debug.Log($"[SpaceLabs]: {part.name} / {part.title}");
+            //}
             
             return unlockedparts.Count() > 0;
         }
