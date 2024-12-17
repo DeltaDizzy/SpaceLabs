@@ -3,7 +3,7 @@ using Contracts;
 using UnityEngine;
 
 namespace SpaceLabs {
-    [KSPAddon(KSPAddon.Startup.MainMenu, true)]
+    //[KSPAddon(KSPAddon.Startup.MainMenu, true)]
     public class SpaceLabs : MonoBehaviour
     {
         void Start() {

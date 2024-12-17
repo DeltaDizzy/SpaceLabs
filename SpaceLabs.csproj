@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
     <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <GenerateKSPAssemblyAttribute>true</GenerateKSPAssemblyAttribute>
+    <GenerateKSPAssemblyDependencyAttributes>true</GenerateKSPAssemblyDependencyAttributes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +18,20 @@
       <URL>https://github.com/DeltaDizzy/SpaceLabs/releases/latest/download/SpaceLabs.version</URL>
       <Download>https://github.com/DeltaDizzy/SpaceLabs/releases/latest</Download>
     </KSPVersionFile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Depends on Modulemanager and Harmony -->
+    <Reference Include="$(KSPRoot)/ModuleManager.*.dll">
+      <Private>False</Private>
+      <CKANIdentifier>ModuleManager</CKANIdentifier>
+    </Reference>
+    <Reference Include="ContractConfigurator, Culture=neutral, PublicKeyToken=null">
+      <HintPath>$(KSPRoot)/GameData/ContractConfigurator/ContractConfigurator.dll</HintPath>
+      <Private>False</Private>
+      <CKANIdentifier>ContractConfigurator</CKANIdentifier>
+    </Reference>
+    <CKANDependency Include="ContractConfigurator-KerbinSpaceStation"/>
   </ItemGroup>
 
 </Project>
