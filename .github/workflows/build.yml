@@ -1,1 +1,11 @@
+name: Build
 
+on:
+    push:
+        branches: [ main ]
+
+jobs:
+    build:
+        uses: KSPModdingLibs/KSPBuildTools/.github/workflows/build.yml@main
+        with:
+            use-ckan: true
